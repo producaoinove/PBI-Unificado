@@ -21,16 +21,16 @@ export default function RootLayout({
         <title>{metadata.title?.toString()}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className={`${poppins.className} tablet:bg-background mobile:bg-mat-black`}>
-        <div className="inset-0 z[-1]">
-          <Image
-            src="/background-wide.png"
-            alt="screens background"
-            width={7800}
-            height={3080}
-            quality={100}
-            className="absolute bg-cover bg-center h-screen w-screen object-cover object-left brightness-150 max-tablet:hidden"
-          />
+      <body className={`${poppins.className} tablet:bg-background mobile:bg-mat-black laptop:bg-mat-black`}>
+	  	<div className="md:inset-0 md:z-[-1] mobile:inset-full bg-dark-small-size">
+			<Image
+				src="/background-wide.png"
+				alt="screens background"
+				quality={100}
+				layout="fill"
+				objectFit="cover"
+				className="absolute bg-cover bg-center h-screen w-screen object-cover object-left brightness-150 max-tablet:hidden"
+			/>
         </div>
         {children}
       </body>
