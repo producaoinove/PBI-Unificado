@@ -3,7 +3,6 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import { Toaster } from "@/components/ui/toaster";
-import { verifyUserSession } from "@/components/user/user-session";
 
 const poppins = Poppins({ subsets: ["latin"] , weight: ["100", "200", "300","400","700","800"]});
 
@@ -17,7 +16,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-	<verifyUserSession/>
 	return (
 		<html lang="pt-br">
 		<head>
