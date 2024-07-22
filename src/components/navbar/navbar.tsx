@@ -20,16 +20,15 @@ export function MainNavBar() {
                     <span className="text-light-green text-3xl">Inove</span>
                     <span className="text-white text-3xl">Telecom</span>
                 </div>
-                {/* <a href="#home" className="w-auto block flex-grow text-end text-white text-xl hover:text-light-green">DFV: X</a> */}
                 <DropdownMenu>
                     <DropdownMenuTrigger className="w-auto block flex-grow text-center text-white text-xl hover:text-light-green focus:outline-none">DFV</DropdownMenuTrigger>
                     <DropdownMenuContent>
                         <DropdownMenuLabel className="font-semibold">Regionais</DropdownMenuLabel>
                         <DropdownMenuSeparator className="bg-light-green"/>
                         <DropdownMenuItem><Link href="/dfv/rcs/sul">RCS: SUL</Link></DropdownMenuItem>
-                        <DropdownMenuItem><Link href="/dfv/rcs/sul">RCS: CENTRO - OESTE</Link></DropdownMenuItem>
-                        <DropdownMenuItem><Link href="/dfv/rcs/sul">RNN</Link></DropdownMenuItem>
-                        <DropdownMenuItem><Link href="/dfv/rcs/sul">RSE</Link></DropdownMenuItem>
+                        <DropdownMenuItem><Link href="/dfv/rcs/centro">RCS: CENTRO - OESTE</Link></DropdownMenuItem>
+                        <DropdownMenuItem><Link href="/dfv/rnn">RNN</Link></DropdownMenuItem>
+                        <DropdownMenuItem><Link href="/dfv/sre">RSE</Link></DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
                 <a href="/ofertas" className="w-auto block flex-grow text-center text-white text-xl hover:text-light-green focus:outline-none">OFERTAS</a>
