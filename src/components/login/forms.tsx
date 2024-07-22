@@ -23,22 +23,16 @@ import {
 } from "@/components/ui/select"
 import { useRouter } from 'next/navigation';
 import React, { useState, FormEvent } from 'react';
-import dotenv from 'dotenv';
-import { Bounce, ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-dotenv.config()
-
-const UserDataMock = {
-	'username' : 'teste',
-	'password' : 'teste123',
-	'entry' : '1 - PBI unificado',
-}
+import { useToast } from "@/components/ui/use-toast"
+import * as dotenv from "dotenv";
+dotenv.config();
 
 export function LoginForm() {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
   	const [error, setError] = useState<string | null>(null)
 	const router = useRouter();
+	const { toast } = useToast()
+
 	const userFormSchema = z.object({
 		username: z.string().min(2, {
 		  message: "Nome de usuário precisa ser maior que 2 digitos.",
@@ -62,17 +56,9 @@ export function LoginForm() {
 	async function onSubmit(values: z.infer<typeof userFormSchema>) {
 		setIsLoading(true)
 		setError(null)
-		// const userName = UserDataMock.username
-		// const userPass = UserDataMock.password
-		// const userEntry = UserDataMock.entry
-		// if (values.username == userName ||  values.password == userPass || values.entry == userEntry) {
-		//     console.log(values)
-		//     router.push('/')
-		// }
 		if (values.username != ''||  values.password != '' || values.entry != '') {
 			try {
-				const api_url = 'http://168.121.7.194:5001'
-				console.log(JSON.stringify(values))
+				const api_url = process.env.NEXT_PUBLIC_API_URL;
 				const response = await fetch(`${api_url}/api/auth`, {
 					method: 'POST',
 					headers: {
@@ -80,39 +66,62 @@ export function LoginForm() {
 					},
 					body: JSON.stringify(values)
 				  })
-				  const data = await response.json()
-				  const userAuth = data['auth_session']
+				const data = await response.json()
+				const userAuth = data['auth_session']
 				  
-				if (userAuth) {
-					toast.success('Login realizado com sucesso! ✅', {
-						position: "bottom-right",
-						autoClose: 5000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: "dark",
-						transition: Bounce,
-					});
-					// router.push('/')
+				if (userAuth) {			
+					if (values.entry === '2') {
+						const response = await fetch(`${api_url}/index`, {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded'
+							},
+							body: new URLSearchParams({
+								'user': values.username,
+								'password': values.password
+							})
+						});
+						if (response.status === 401) {
+							form.setError("username", {
+								message: "O usuário não possui privilégios administrativos"
+                            });
+						} else {
+							const form = document.createElement('form');
+							form.method = 'POST';
+							form.action = `${api_url}/index`;
+							const input1 = document.createElement('input');
+							input1.type = 'hidden';
+							input1.name = 'user';
+							input1.value = values.username;
+							const input2 = document.createElement('input');
+							input2.type = 'hidden';
+							input2.name = 'password';
+							input2.value = values.password;
+							form.appendChild(input1);
+							form.appendChild(input2);
+							document.body.appendChild(form);
+							form.submit();
+						}
+					} else {
+						toast({
+							title: "Login realizado com sucesso! ✅",
+							description: "Usuário autenticado!",
+						})
+						localStorage.setItem('user_auth', 'true')
+						router.push('/');
+					}
 				}
 				else {
-					toast.error('Credenciais incorretas, tente novamente! ❌', {
-						position: "bottom-right",
-						autoClose: 5000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: "dark",
-						transition: Bounce,
-					});
+					toast({
+						title: "Credenciais incorretas, tente novamente! ❌",
+						description: "Usuário ou senha incorretos!",
+					})
 				}
-				console.log(data['username'])
 			} catch (error) {
-				console.log(error)
+				toast({
+					title: "Erro interno no servidor, tente novamente mais tarde! 🚧",
+					description: "Erro na conexão do servidor.",
+				})
 			}
 			finally {
 				setIsLoading(false)
@@ -122,7 +131,7 @@ export function LoginForm() {
 
 	return (
 		<Form {...form}>
-		<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-8 max-tablet:p-32 max-tablet:space-y-7">
+		<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-8 max-tablet:p-32 max-tablet:space-y-7" method="post">
 			<FormField
 				control={form.control}
 				name="username"
