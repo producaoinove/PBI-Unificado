@@ -27,7 +27,7 @@ import { useToast } from "@/components/ui/use-toast"
 import * as dotenv from "dotenv";
 dotenv.config();
 
-export function LoginForm() {
+export function AdminForms() {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
   	const [error, setError] = useState<string | null>(null)
 	const router = useRouter();
@@ -40,9 +40,6 @@ export function LoginForm() {
 		password: z.string().min(2, {
 		  message: "Senha  precisa ser maior que 2 digitos.",
 		}),
-		entry: z
-		.string({ required_error: "Selecione uma entrada" })
-		.min(1, { message: "Tipo de entrada não pode ser vazio" })
 	})
 	
 	const form = useForm<z.infer<typeof userFormSchema>>({
@@ -50,16 +47,15 @@ export function LoginForm() {
 		defaultValues: {
 			username: "",
 			password: "",
-			entry: ""
 		},
 	})
 	async function onSubmit(values: z.infer<typeof userFormSchema>) {
 		setIsLoading(true)
 		setError(null)
-		if (values.username != ''||  values.password != '' || values.entry != '') {
+		if (values.username != ''||  values.password != '') {
 			try {
 				const api_url = process.env.NEXT_PUBLIC_API_URL;
-				const response = await fetch(`${api_url}/api/auth`, {
+				const response = await fetch(`${api_url}/api/users`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -67,56 +63,21 @@ export function LoginForm() {
 					body: JSON.stringify(values)
 				  })
 				const data = await response.json()
-				const userAuth = data['auth_session']
-				const user_name = data['username']
+				console.log(data)
+				const userAuth = data['role']
 				  
-				if (userAuth) {			
-					if (values.entry === '2') {
-						const response = await fetch(`${api_url}/index`, {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/x-www-form-urlencoded'
-							},
-							body: new URLSearchParams({
-								'user': values.username,
-								'password': values.password
-							})
-						});
-						if (response.status === 401) {
-							form.setError("username", {
-								message: "O usuário não possui privilégios administrativos"
-                            });
-						} else {
-							const form = document.createElement('form');
-							form.method = 'POST';
-							form.action = `${api_url}/index`;
-							const input1 = document.createElement('input');
-							input1.type = 'hidden';
-							input1.name = 'user';
-							input1.value = values.username;
-							const input2 = document.createElement('input');
-							input2.type = 'hidden';
-							input2.name = 'password';
-							input2.value = values.password;
-							form.appendChild(input1);
-							form.appendChild(input2);
-							document.body.appendChild(form);
-							form.submit();
-						}
-					} else {
-						toast({
-							title: "Login realizado com sucesso! ✅",
-							description: "Usuário autenticado!",
-						})
-						localStorage.setItem('user_auth', 'true')
-						localStorage.setItem('user_name', user_name.toString())
-						router.push('/');
-					}
+				if (userAuth == 'administrador') {		
+					toast({
+						title: "Login realizado com sucesso! ✅",
+						description: "Usuário autenticado!",
+					})
+					// localStorage.setItem('adm_auth', 'true')
+					// router.push('/painel/administrador');
+					
 				}
 				else {
 					toast({
-						title: "Credenciais incorretas, tente novamente! ❌",
-						description: "Usuário ou senha incorretos!",
+						title: "Credenciais incorretas ou permissões não suficientes, tente novamente! ❌"
 					})
 				}
 			} catch (error) {
@@ -133,7 +94,7 @@ export function LoginForm() {
 
 	return (
 		<Form {...form}>
-		<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-8 max-tablet:p-32 max-tablet:space-y-7" method="post">
+		<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10 p-8 max-tablet:p-32 max-tablet:space-y-7" method="post">
 			<FormField
 				control={form.control}
 				name="username"
@@ -156,27 +117,6 @@ export function LoginForm() {
 					<FormControl>
 					<Input placeholder="Senha" {...field} className="text-gray h-11" type="password"/>
 					</FormControl>
-					<FormMessage />
-				</FormItem>
-				)}
-			/>
-			<FormField
-				control={form.control}
-				name="entry"
-				render={({ field }) => (
-				<FormItem>
-					<FormLabel className="text-full-white">Tipo de Entrada</FormLabel>
-					<Select onValueChange={field.onChange} defaultValue={field.value}>
-						<FormControl>
-							<SelectTrigger className="w-full h-11 text-mat-black">
-							<SelectValue placeholder="Selecione uma entrada" />
-							</SelectTrigger>
-						</FormControl>
-						<SelectContent>
-							<SelectItem value="1">1 - PBI unificado</SelectItem>
-							<SelectItem value="2">2 - Administrativo</SelectItem>
-						</SelectContent>
-					</Select>
 					<FormMessage />
 				</FormItem>
 				)}

@@ -22,7 +22,7 @@ export default function RootLayout({
 			<title>{metadata.title?.toString()}</title>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		</head>
-		<body className={`${poppins.className} tablet:bg-background mobile:bg-mat-black laptop:bg-mat-black`}>
+		<body className={`${poppins.className} tablet:bg-background mobile:bg-mat-black laptop:bg-mat-black overflow-x-hidden overflow-y-auto scrollbar scrollbar-thumb-gray`}>
 			<div className="md:inset-0 md:z-[-1] mobile:inset-full bg-dark-small-size">
 				<Image
 					src="/background-wide.png"
@@ -35,7 +35,7 @@ export default function RootLayout({
 			</div>
 			{children}
 			<div className="w-[320px]">
-				<Toaster />
+				<Toaster/>
 			</div>
 		</body>
 		</html>
