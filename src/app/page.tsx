@@ -2,19 +2,8 @@
 
 import { MainNavBar } from "@/components/navbar/navbar";
 import { HelpCard } from "@/components/home/helpCard";
-import { useRouter } from 'next/navigation';
+import verifyUserSession from "@/components/user_session/userSession";
 
-export function verifyUserSession() {
-	const router = useRouter();
-	const local_session = localStorage.getItem('user_auth')
-	if (local_session != 'true') {
-		router.push('/login');
-	} else {
-		setTimeout(() => {
-			localStorage.setItem('user_auth', 'false');
-		}, 6 * 60 * 60 * 1000);
-	}
-}
 export default function Home() {
 	verifyUserSession();
 	return (

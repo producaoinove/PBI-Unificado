@@ -15,6 +15,7 @@ import { EllipsisVertical, LogOut  } from 'lucide-react';
 export function MainNavBar() {
 	function logOff() {
 		localStorage.setItem('user_auth', 'false')
+		localStorage.setItem('user_name', '')
 	}
     return (
         <>

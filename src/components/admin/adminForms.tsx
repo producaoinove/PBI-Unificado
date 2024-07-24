@@ -7,20 +7,12 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select"
 import { useRouter } from 'next/navigation';
 import React, { useState, FormEvent } from 'react';
 import { useToast } from "@/components/ui/use-toast"
@@ -63,7 +55,6 @@ export function AdminForms() {
 					body: JSON.stringify(values)
 				  })
 				const data = await response.json()
-				console.log(data)
 				const userAuth = data['role']
 				  
 				if (userAuth == 'administrador') {		
@@ -71,9 +62,8 @@ export function AdminForms() {
 						title: "Login realizado com sucesso! ✅",
 						description: "Usuário autenticado!",
 					})
-					// localStorage.setItem('adm_auth', 'true')
-					// router.push('/painel/administrador');
-					
+					localStorage.setItem('adm_auth', 'true')
+					router.push('/painel/administrador');
 				}
 				else {
 					toast({

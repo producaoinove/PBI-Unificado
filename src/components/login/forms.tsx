@@ -65,7 +65,7 @@ export function LoginForm() {
 						'Content-Type': 'application/json'
 					},
 					body: JSON.stringify(values)
-				  })
+				})
 				const data = await response.json()
 				const userAuth = data['auth_session']
 				const user_name = data['username']

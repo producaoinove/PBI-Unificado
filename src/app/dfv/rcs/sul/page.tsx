@@ -1,7 +1,11 @@
+'use client'
+
 import { MainNavBar } from "@/components/navbar/navbar"
 import AuthSheet from "@/components/sheet/authSheet";
+import verifyUserSession from "@/components/user_session/userSession";
 
 export default function dfv_rcs_sul() {
+	verifyUserSession();
 	return (
 		<>
 			<MainNavBar/>
