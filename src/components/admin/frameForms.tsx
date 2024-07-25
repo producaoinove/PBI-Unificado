@@ -21,6 +21,17 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select"
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 import { useRouter } from 'next/navigation';
 import React, { useState, FormEvent } from 'react';
 import { useToast } from "@/components/ui/use-toast"
@@ -29,6 +40,7 @@ dotenv.config();
 
 export function FrameForm() {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
+	const [isAlertOn, setIsAlertOn] = useState<boolean>(false)
   	const [error, setError] = useState<string | null>(null)
 	const router = useRouter();
 	const { toast } = useToast()
@@ -129,9 +141,28 @@ export function FrameForm() {
 				)}
 			/>
 			<div className="flex items-center justify-center">
-				<Button type="submit" disabled = {isLoading} className="bg-dark-green text-full-white w-72 hover:bg-mat-black font-medium text-xl">
+				{/* <Button type="submit" disabled = {isLoading} className="bg-dark-green text-full-white w-72 hover:bg-mat-black font-medium text-xl">
 					{ isLoading ? <div className="border-white h-5 w-5 animate-spin rounded-full border-4 border-t-light-green" /> : 'Atualizar'}
-				</Button>
+				</Button> */}
+				<AlertDialog>
+					<AlertDialogTrigger className="bg-dark-green text-full-white w-72 hover:bg-mat-black font-medium text-xl rounded-md h-10">Atualizar</AlertDialogTrigger>
+					<AlertDialogContent className="rounded-md flex flex-col items-center justify-center">
+						<AlertDialogHeader className="flex flex-col">
+							<AlertDialogTitle>Tem certeza que quer realizar esta ação?</AlertDialogTitle>
+							<AlertDialogDescription className="text-gray">
+								<span className="text-red-700 font-bold">Cuidado:</span> Esta ação não é reversível.
+							</AlertDialogDescription>
+						</AlertDialogHeader>
+						<AlertDialogFooter className="flex flex-row items-center justify-center flex-wrap h-auto w-auto">
+							<AlertDialogCancel className="bg-red-700 font-semibold hover:bg-red-800 text-full-white w-auto m-5">Cancelar</AlertDialogCancel>
+							<AlertDialogAction onClick={form.handleSubmit(onSubmit)} disabled = {isLoading} type="submit" className="bg-green-600 hover:bg-green-800 font-semibold w-auto m-5">{ isLoading ? <div className="border-white h-5 w-5 animate-spin rounded-full border-4 border-t-light-green" /> : 'Continuar'}</AlertDialogAction>
+							{/* <Button type="submit" disabled = {isLoading}  className="bg-green-600 hover:bg-green-800 font-semibold w-auto m-5">
+								{ isLoading ? <div className="border-white h-5 w-5 animate-spin rounded-full border-4 border-t-light-green" /> : 'Confirmar'}
+							</Button> */}
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialog>
+				{/* <Button type="submit" disabled = {isLoading} className="bg-dark-green text-full-white w-72 hover:bg-mat-black font-medium text-xl">Atualizar</Button> */}
 			</div>
 		</form>
 	  </Form>

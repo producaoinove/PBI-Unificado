@@ -16,6 +16,9 @@ export function MainNavBar() {
 	function logOff() {
 		localStorage.setItem('user_auth', 'false')
 		localStorage.setItem('user_name', '')
+		if (localStorage.getItem('adm_auth') != null) {
+			localStorage.removeItem('adm_auth')
+		}
 	}
     return (
         <>
