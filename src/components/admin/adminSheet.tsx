@@ -30,8 +30,8 @@ export function AdminSheet() {
 						Painel administativo da Inove.
 					</SheetDescription>
 				</SheetHeader>
-				<div className="grid gap-4 py-5 mt-10">
-					<ul className="p-8 w-60 h-auto flex flex-col text-nowrap list-none border rounded-md border-gray bg-neutral-800 max-tablet:border-mat-black max-tablet:w-auto">
+				<div className="gap-4 py-5 mt-10 flex items-center justify-center">
+					<ul className="p-8 w-60 h-auto flex flex-col items-center justify-center text-nowrap list-none border rounded-md border-gray bg-neutral-800 max-tablet:border-mat-black max-tablet:w-auto">
 						<Link href="/painel/administrador/fonte" className="w-full flex items-start justify-start border-b-2 border-light-green">
 							<li className="text-base text-mat-white p-4 hover:text-light-green w-full flex items-center">
 								<Database size={24} color="gray" className="flex items-start justify-start mr-2"/> 
