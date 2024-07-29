@@ -14,11 +14,7 @@ import { EllipsisVertical, LogOut  } from 'lucide-react';
 
 export function MainNavBar() {
 	function logOff() {
-		localStorage.setItem('user_auth', 'false')
-		localStorage.setItem('user_name', '')
-		if (localStorage.getItem('adm_auth') != null) {
-			localStorage.removeItem('adm_auth')
-		}
+		localStorage.clear()
 	}
     return (
         <>
@@ -49,9 +45,9 @@ export function MainNavBar() {
                         <DropdownMenuSeparator  className="bg-light-green"/>
                         <DropdownMenuItem><Link href="/painel/login">Acesso Administrativo</Link></DropdownMenuItem>
                         <Link href="/login">
-                            <DropdownMenuItem className="w-full text-red-500">
-                                <LogOut size={24} strokeWidth={1.25} onClick={logOff}/> Sair
-                            </DropdownMenuItem>
+							<DropdownMenuItem className="w-full text-red-500" onClick={logOff}>
+								<LogOut size={24} strokeWidth={1.25}/> Sair
+							</DropdownMenuItem>
                         </Link>
                     </DropdownMenuContent>
                 </DropdownMenu>

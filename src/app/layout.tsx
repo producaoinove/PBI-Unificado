@@ -34,9 +34,9 @@ export default function RootLayout({
 				/>
 			</div>
 			{children}
-			<div className="w-[320px]">
-				<Toaster/>
-			</div>
+			<Toaster/>
+			{/* <div className="w-[320px]">
+			</div> */}
 		</body>
 		</html>
 	);

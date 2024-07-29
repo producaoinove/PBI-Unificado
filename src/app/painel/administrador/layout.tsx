@@ -8,7 +8,7 @@ export default function AdminRootLayout({ children }: Readonly<{children: React.
 			<div className="bg-zinc-800">
 				<AdminSheet/>
 			</div>
-			<main className="bg-zinc-800 w-screen flex items-center justify-center h-screen">
+			<main className="bg-zinc-800 w-screen flex items-center justify-center h-screen max-tablet:overflow-x-hidden max-tablet:text-balance">
 				<div className="flex items-center justify-center h-full w-full">
 					{children}
 				</div>

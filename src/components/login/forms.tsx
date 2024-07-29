@@ -107,20 +107,31 @@ export function LoginForm() {
 						toast({
 							title: "Login realizado com sucesso! ✅",
 							description: "Usuário autenticado!",
+							color: "gray"
 						})
 						localStorage.setItem('user_auth', 'true')
 						localStorage.setItem('user_name', user_name.toString())
-						router.push('/');
+						if (values.entry == '1') {
+							router.push('/');
+						}
+						else if (values.entry == '3') {
+							if (user_name == 'producao.inove') {
+								localStorage.setItem('adm_auth', 'true')
+								router.push('/painel/administrador')
+							}
+						}
 					}
 				}
 				else {
 					toast({
+						variant: "destructive",
 						title: "Credenciais incorretas, tente novamente! ❌",
 						description: "Usuário ou senha incorretos!",
 					})
 				}
 			} catch (error) {
 				toast({
+					variant: "destructive",
 					title: "Erro interno no servidor, tente novamente mais tarde! 🚧",
 					description: "Erro na conexão do servidor.",
 				})
@@ -174,7 +185,8 @@ export function LoginForm() {
 						</FormControl>
 						<SelectContent>
 							<SelectItem value="1">1 - PBI unificado</SelectItem>
-							<SelectItem value="2">2 - Administrativo</SelectItem>
+							<SelectItem value="2">2 - Migrador</SelectItem>
+							<SelectItem value="3">3 - Administrativo</SelectItem>
 						</SelectContent>
 					</Select>
 					<FormMessage />
