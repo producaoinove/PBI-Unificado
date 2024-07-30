@@ -118,6 +118,17 @@ export function LoginForm() {
 							if (user_name == 'producao.inove') {
 								localStorage.setItem('adm_auth', 'true')
 								router.push('/painel/administrador')
+								toast({
+									title: "Login realizado com sucesso! ✅",
+									description: "Usuário autenticado!",
+									color: "gray"
+								})
+							} else {
+								toast({
+									variant: "destructive",
+									title: "Permissões não suficientes para este usuário 💀",
+								})
+								localStorage.clear()
 							}
 						}
 					}

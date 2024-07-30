@@ -18,7 +18,7 @@ export default function Admin() {
 					</div>
 					<div className="space-y-4 mt-5">
 						<li className="text-light-green text-lg">Users</li>
-						<p className="ml-10 text-red-500 line-through">Ainda em desenvolvimento</p>
+						<p className="ml-10">Ver os usuários do sistema</p>
 					</div>
 				</ul>
 			</div>
