@@ -72,7 +72,6 @@ export default function AuthSheet(frame: Frame) {
 				  })
 				const data = await response.json()
 				const userAuth = data['auth_session']
-				  
 				if (userAuth) {
 					toast({
 						title: "Usuário Autenticado com sucesso! ✅",
@@ -159,18 +158,7 @@ export default function AuthSheet(frame: Frame) {
 								: ''
 							}
 						</form>
-					</Form>
-					{/* <div className="grid gap-4 py-4">
-						<div className="grid grid-cols-4 items-center gap-4">
-							<Label htmlFor="username" className="text-right">Usuário</Label>
-							<Input id="username" placeholder="Nome de usuário" className="col-span-3" />
-						</div>
-						<div className="grid grid-cols-4 items-center gap-4">
-							<Label htmlFor="password" className="text-right">Senha</Label>
-							<Input id="password" placeholder="Digite sua senha" className="col-span-3" />
-						</div>
-					</div> */}
-					
+					</Form>					
 				</SheetContent>
 			</Sheet>
 		</div>

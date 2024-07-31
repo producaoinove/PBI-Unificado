@@ -46,8 +46,8 @@ export function FrameForm() {
 	const { toast } = useToast()
 
 	const frameFormSchema = z.object({
-		frame_url: z.string().min(2, {
-		  message: "Token precisa ser maior que 2 digitos.",
+		frame_url: z.string().min(10, {
+		  message: "Token precisa ser maior que 10 digitos.",
 		}),
 		frame_name: z
 		.string({ required_error: "Selecione uma entrada" })
@@ -61,6 +61,7 @@ export function FrameForm() {
 			frame_name: ""
 		},
 	})
+
 	async function onSubmit(values: z.infer<typeof frameFormSchema>) {
 		setIsLoading(true)
 		setError(null)
@@ -96,7 +97,12 @@ export function FrameForm() {
 			finally {
 				setIsLoading(false)
 			}
-		}		
+		} 
+		else {
+			toast({
+				title: "Dados vazios, tente novamente! ❌"
+			})
+		}
 	}
 
 	return (
@@ -141,9 +147,6 @@ export function FrameForm() {
 				)}
 			/>
 			<div className="flex items-center justify-center">
-				{/* <Button type="submit" disabled = {isLoading} className="bg-dark-green text-full-white w-72 hover:bg-mat-black font-medium text-xl">
-					{ isLoading ? <div className="border-white h-5 w-5 animate-spin rounded-full border-4 border-t-light-green" /> : 'Atualizar'}
-				</Button> */}
 				<AlertDialog>
 					<AlertDialogTrigger className="bg-dark-green text-full-white w-72 hover:bg-mat-black font-medium text-xl rounded-md h-10">Atualizar</AlertDialogTrigger>
 					<AlertDialogContent className="rounded-md flex flex-col items-center justify-center">
@@ -156,13 +159,9 @@ export function FrameForm() {
 						<AlertDialogFooter className="flex flex-row items-center justify-center flex-wrap h-auto w-auto">
 							<AlertDialogCancel className="bg-red-700 font-semibold hover:bg-red-800 text-full-white w-auto m-5">Cancelar</AlertDialogCancel>
 							<AlertDialogAction onClick={form.handleSubmit(onSubmit)} disabled = {isLoading} type="submit" className="bg-green-600 hover:bg-green-800 font-semibold w-auto m-5">{ isLoading ? <div className="border-white h-5 w-5 animate-spin rounded-full border-4 border-t-light-green" /> : 'Continuar'}</AlertDialogAction>
-							{/* <Button type="submit" disabled = {isLoading}  className="bg-green-600 hover:bg-green-800 font-semibold w-auto m-5">
-								{ isLoading ? <div className="border-white h-5 w-5 animate-spin rounded-full border-4 border-t-light-green" /> : 'Confirmar'}
-							</Button> */}
 						</AlertDialogFooter>
 					</AlertDialogContent>
 				</AlertDialog>
-				{/* <Button type="submit" disabled = {isLoading} className="bg-dark-green text-full-white w-72 hover:bg-mat-black font-medium text-xl">Atualizar</Button> */}
 			</div>
 		</form>
 	  </Form>

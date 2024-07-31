@@ -1,10 +1,10 @@
 'use client'
 
 import { LoginForm } from "@/components/login/forms";
-import verifyUserLoginSession from "@/components/user_session/userLoginSession";
+import VerifyUserLoginSession from "@/components/user_session/userLoginSession";
 
 export default function Login() {
-	verifyUserLoginSession();
+	VerifyUserLoginSession();
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24 overflow-hidden max-tablet:p-1 max-tablet:justify-center laptop:max-h-7">
 			<div className="bg-black  w-[31.25rem] h-[38.75rem] z-0 rounded-xl bg-opacity-35 max-tablet:bg-mat-black">

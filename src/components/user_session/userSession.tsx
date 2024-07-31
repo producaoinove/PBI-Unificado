@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-export default function verifyUserSession() {
+export default function VerifyUserSession() {
 	const router = useRouter();
 	useEffect(() => {
 		const local_session = localStorage.getItem('user_auth')

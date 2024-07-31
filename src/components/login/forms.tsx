@@ -53,6 +53,7 @@ export function LoginForm() {
 			entry: ""
 		},
 	})
+	
 	async function onSubmit(values: z.infer<typeof userFormSchema>) {
 		setIsLoading(true)
 		setError(null)
@@ -112,7 +113,7 @@ export function LoginForm() {
 						localStorage.setItem('user_auth', 'true')
 						localStorage.setItem('user_name', user_name.toString())
 						if (values.entry == '1') {
-							router.push('/');
+							router.push('/loading');
 						}
 						else if (values.entry == '3') {
 							if (user_name == 'producao.inove') {

@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-export default function verifyAdmSession() {
+export default function VerifyAdmSession() {
 	const router = useRouter();
 	useEffect(() => {
 		const local_session = localStorage.getItem('adm_auth')

@@ -3,12 +3,12 @@
 
 import { MainNavBar } from "@/components/navbar/navbar"
 import AuthSheet from "@/components/sheet/authSheet";
-import verifyUserSession from "@/components/user_session/userSession";
+import VerifyUserSession from "@/components/user_session/userSession";
 import { useEffect, useState } from "react";
 import getTokenById from "@/components/token/getToken";
 
-export default function dfv_rcs_centro() {
-	verifyUserSession();
+export default function Dfv_rcs_centro() {
+	VerifyUserSession();
 	const [token, getToken] = useState<any>(null)
 
 	const frame = JSON.stringify({

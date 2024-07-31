@@ -1,13 +1,13 @@
 'use client'
-import verifyAdmSession from "@/components/user_session/admSession";
+import VerifyAdmSession from "@/components/user_session/admSession";
 
 export default function Admin() {
-	verifyAdmSession();
+	VerifyAdmSession();
 	return (
 		<div className="max-tablet:p-10">
 			<h1 className="text-3xl text-light-green w-auto h-auto underline decoration-solid underline-offset-4 text-center text-balance">Painel Administrativo</h1>
 			<div className="flex items-center justify-center text-center mt-5">
-				<p className="text-base text-balance">Altere informações importantes sobre os <span className=" underline decoration-wavy text-yellow-300">Power Bi's</span> em um só lugar!</p>
+				<p className="text-base text-balance">Altere informações importantes sobre os <span className=" underline decoration-wavy text-yellow-300">Power Bi</span> em um só lugar!</p>
 			</div>
 			<div className="bg-mat-black mt-5 rounded-md p-4">
 				<h2 className="text-xl">Índice</h2>

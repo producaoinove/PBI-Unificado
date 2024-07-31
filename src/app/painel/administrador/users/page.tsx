@@ -1,6 +1,6 @@
 'use client'
 
-import verifyAdmSession from "@/components/user_session/admSession";
+import VerifyAdmSession from "@/components/user_session/admSession";
 import React, { useEffect, useState } from 'react';
 import {
 	Table,
@@ -21,7 +21,7 @@ interface User {
 }
 
 export default function Users() {
-	verifyAdmSession();
+	VerifyAdmSession();
 	const [userList, setUserList] = useState<User[]>([]);
 	
 		const getUsers = async () => {
@@ -66,14 +66,7 @@ export default function Users() {
 							</TableRow>
 						))}
 					</TableBody>
-					<TableFooter>
-						{/* <TableRow>
-							<TableCell colSpan={3}>Total</TableCell>
-							<TableCell className="text-right">$2,500.00</TableCell>
-						</TableRow> */}
-					</TableFooter>
 				</Table>
-				{/* {user.map((user) => ())} */}
 			</div>
 		</div>
 	)

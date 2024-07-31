@@ -2,10 +2,10 @@
 
 import { MainNavBar } from "@/components/navbar/navbar";
 import { HelpCard } from "@/components/home/helpCard";
-import verifyUserSession from "@/components/user_session/userSession";
+import VerifyUserSession from "@/components/user_session/userSession";
 
 export default function Home() {
-	verifyUserSession();
+	VerifyUserSession();
 	return (
 		<>
 			<MainNavBar/>
@@ -16,7 +16,7 @@ export default function Home() {
 					
 					<div className="bg-neutral-900 border-2 border-gray rounded-md w-full h-[18.75rem] text-white p-4 overflow-y-auto scrollbar scrollbar-thumb-gray">
 						<div className="text-xl text-light-green">
-							<h1>DFV</h1>
+							<h1>DFV 🏆</h1>
 							<HelpCard title="DFV RSE" content="Verificar viabilidade para a regional RSE (ES, MG, RJ, SP)."/>
 							<HelpCard title="DFV RNN" content="Verificar viabilidade para a regional RNN (AL, AM, AP, BA, CE, MA, PA, PB, PE, PI, RN, RR, SE)."/>
 							<HelpCard title="DFV RCS: CENTRO-OESTE" content="Verificar viabilidade para a regional RCS: CENTRO-OESTE (AC, DF, GO, MS, MT, RO, TO)."/>
@@ -26,7 +26,7 @@ export default function Home() {
 
 					<div className="bg-neutral-900 border-2 border-gray rounded-md w-full h-[18.75rem] text-white p-4 mt-5">
 						<div className="text-xl text-light-green">
-							<h1>Padrão Inove</h1>
+							<h1>Padrão Inove 🛫</h1>
 							<HelpCard title="OFERTAS" content="Ofertas correntes em cada UF e Municipio."/>
 							<HelpCard title="LISTA TELEFÔNICA" content="Puxar dados a partir do CNPJ, Razão Social ou Telefone."/>
 						</div>

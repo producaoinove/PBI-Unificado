@@ -20,7 +20,7 @@ export function MainNavBar() {
         <>
             <nav className="absolute bg-black bg-opacity-35 w-screen flex items-center justify-between h-[100px] space-x-8">
                 <div className="flex items-center flex-shrink-0 w-80 ml-6">
-					<Link href="/">
+					<Link href="/" className="transition duration-1000 hover:animate-pulse transform ease-linear">
 						<span className="text-light-green text-3xl">Inove</span>
 						<span className="text-white text-3xl">Telecom</span>
 					</Link>
@@ -30,10 +30,10 @@ export function MainNavBar() {
                     <DropdownMenuContent>
                         <DropdownMenuLabel className="font-semibold">Regionais</DropdownMenuLabel>
                         <DropdownMenuSeparator className="bg-light-green"/>
-                        <DropdownMenuItem><Link href="/dfv/rcs/sul">RCS: SUL</Link></DropdownMenuItem>
-                        <DropdownMenuItem><Link href="/dfv/rcs/centro">RCS: CENTRO - OESTE</Link></DropdownMenuItem>
-                        <DropdownMenuItem><Link href="/dfv/rnn">RNN</Link></DropdownMenuItem>
-                        <DropdownMenuItem><Link href="/dfv/rse">RSE</Link></DropdownMenuItem>
+                        <Link href="/dfv/rcs/sul"><DropdownMenuItem>RCS: SUL</DropdownMenuItem></Link>
+                        <Link href="/dfv/rcs/centro"><DropdownMenuItem>RCS: CENTRO - OESTE</DropdownMenuItem></Link>
+                        <Link href="/dfv/rnn"><DropdownMenuItem>RNN</DropdownMenuItem></Link>
+                        <Link href="/dfv/rse"><DropdownMenuItem>RSE</DropdownMenuItem></Link>
                     </DropdownMenuContent>
                 </DropdownMenu>
                 <a href="/ofertas" className="w-auto block flex-grow text-center text-white text-xl hover:text-light-green focus:outline-none">OFERTAS</a>
